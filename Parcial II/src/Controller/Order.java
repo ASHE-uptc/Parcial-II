@@ -31,15 +31,20 @@ public class Order {
 
     
     public double calculateTotalOrderValue(){ //■ Recorre todos los productos y suma el total (manejando las excepciones si alguna ocurre).
+        double total=0;
         for (Product p : products) {
-            totalprice+=p.getPro_price();
+            try {
+                total += p.calculateTotalPrice();
+            } catch (Exception e) {
+                System.out.println("Error calculating product: " + e.getMessage());
+            }
         }
-        return totalprice;
+        return total;
     }
 
     public void showOrderDetails(){     //Muestra los productos y su precio total.
         calculateTotalOrderValue();
-        totalprice=totalprice;
+        totalprice=calculateTotalOrderValue();
        System.out.println("\nOrder Products List: \n" + products + "\nTotal Cost: $"+totalprice+"\n____________");
     }
     

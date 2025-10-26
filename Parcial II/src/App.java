@@ -85,12 +85,11 @@ public class App {
                                     Ex=true;
                                 }
 
-                                System.out.println(expirDate);
-
                                 Food food=new Food(name, price, stock, realexpirDate);
                                 order.addProduct(food);
                                 System.out.println("Food "+name+" added succesfully!");
-                                order.calculateTotalOrderValue();
+                                System.out.println("Total Price: "+food.calculateTotalPrice());
+                                
 
                                 order.showOrderDetails();
 
@@ -232,19 +231,16 @@ public class App {
                             try {
                                 System.out.println("Input Size");
                                 String size=ent.nextLine();
-                                boolean test=size.equals("S")||!size.equals("M")||!size.equals("L")||!size.equals("XL");
-                                if (test=false) {
-                                    
-                                    String men="Invalid Size Exception.";
-                                    throw new InvalidSizeException(men);
-                        
+                                
+                                if (!(size.equals("S") || size.equals("M") || size.equals("L") || size.equals("XL"))) {
+                                    throw new InvalidSizeException("Talla inválida");
                                 }else{
                                     Ex=true;
                                 }
 
                                 Cloth cloth=new Cloth(name, price, stock, size);
                                 order.addProduct(cloth);
-                                System.out.println("Tech "+name+" added succesfully!");
+                                System.out.println("Cloth "+name+" added succesfully!");
                                 cloth.calculateTotalPrice();
 
                                 order.showOrderDetails();
@@ -256,7 +252,7 @@ public class App {
                                 }
 
                             } catch(InvalidSizeException e){
-                                throw new InvalidSizeException("Invalid Size Input.");
+                                System.out.println("Error: "+e.getMessage());
                             }
 
                             

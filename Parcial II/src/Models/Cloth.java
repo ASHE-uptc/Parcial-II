@@ -1,5 +1,9 @@
 package Models;
 
+import Exceptions.ExpiredProductException;
+import Exceptions.InvalidProductDataException;
+import Exceptions.InvalidSizeException;
+
 public class Cloth extends Product{
     private String Cloth_size;
 
@@ -19,12 +23,17 @@ public class Cloth extends Product{
     @Override
     public String toString() {
         return "\nCloth \nSize: " + getCloth_size() +"\nName: " + getPro_name() + "\nPrice: " + getPro_price() + "\nStock: "
-                + getPro_stock();
+                + getPro_stock()+"\n_______________";
     }
 
-    public void calculateTotalPrice(){
-        /*○ Si el producto está vencido, lanza una excepción ExpiredProductException.
-        ○ Si no está vencido, retorna basePrice * quantity * 0.9 (10% de descuento).*/
+    @Override
+    public double calculateTotalPrice() throws InvalidSizeException {
+        if (!Cloth_size.equalsIgnoreCase("S")&&!Cloth_size.equalsIgnoreCase("M")&&
+            !Cloth_size.equalsIgnoreCase("L")&&!Cloth_size.equalsIgnoreCase("XL")) {
+            throw new InvalidSizeException(Cloth_size+" Invalid Size input. Must be: S, M, L or XL.");
+        }
+
+        return pro_price*pro_stock;
     }
     
 

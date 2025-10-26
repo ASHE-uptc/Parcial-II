@@ -3,6 +3,8 @@ import java.time.*;
 import java.time.LocalDate;
 import java.util.*;
 
+import Exceptions.ExpiredProductException;
+
 /*
  * @author: Axel Rincón
  * @version: 1.0
@@ -30,16 +32,19 @@ public class Food extends Product{
 
     @Override
     public String toString() {
-        return "Food \nExpiration Date: " + getFood_expirationDate() +"\nName: " + getPro_name() + "\nPrice: " + getPro_price() + "\nStock: "
-                + getPro_stock();
+        return "\nFood \nExpiration Date: " + getFood_expirationDate() +"\nName: " + getPro_name() + "\nPrice: " + getPro_price() + "\nStock: "
+                + getPro_stock()+"\n_______________";
     }
     double totalprice;
     List<Product>products=new ArrayList<>();
-    public double calculateTotalPrice(){
-        for (Product p : products) {
-            totalprice+=(p.getPro_price()*getPro_stock());
+
+    @Override
+    public double calculateTotalPrice() throws ExpiredProductException {
+        LocalDate today=LocalDate.now();
+        if (Food_expirationDate.isBefore(today)) {
+            throw new ExpiredProductException("Product "+pro_name+" expired.");
         }
-        return totalprice;
+        return getPro_price()*getPro_stock()*0.9; //10% de descuento.
     }
 }
 

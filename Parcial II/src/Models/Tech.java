@@ -28,7 +28,7 @@ public class Tech extends Product{
     @Override
     public String toString() {
         return "\nTech \nWarranty: " + getWarrantyMonths() +"\nName: " + getPro_name() + "\nPrice: " + getPro_price() + "\nStock: "
-                + getPro_stock();
+                + getPro_stock()+"\n_______________";
     }
 
     double price;

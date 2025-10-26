@@ -1,5 +1,7 @@
 package Models;
 
+import Exceptions.InvalidProductDataException;
+
 /*
  * @author: Axel Rincón
  * @version: 1.0
@@ -46,10 +48,14 @@ public abstract class Product {
     @Override
     public String toString() {
         return "Product ToString de prueba "+", pro_name=" + pro_name + ", pro_price=" + pro_price + ", pro_stock="
-                + pro_stock + "]";
+                + pro_stock + "\n";
     }
 
+    public abstract double calculateTotalPrice() throws Exception;
     
+    public void showInfo(){
+
+    }
 
     
 
